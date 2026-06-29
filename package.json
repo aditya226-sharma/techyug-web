@@ -1,0 +1,17 @@
+{
+  "name": "techyug-ecosystem",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "install:all": "npm install --prefix api && npm install --prefix public-site && npm install --prefix admin-portal && npm install --prefix ceo-portal",
+    "dev:api": "npm run dev --prefix api",
+    "dev:public": "npm run dev --prefix public-site",
+    "dev:admin": "npm run dev --prefix admin-portal",
+    "dev:ceo": "npm run dev --prefix ceo-portal",
+    "dev": "concurrently -n \"api,public,admin,ceo\" -c \"cyan,green,blue,magenta\" \"npm run dev:api\" \"npm run dev:public\" \"npm run dev:admin\" \"npm run dev:ceo\"",
+    "build:all": "npm run build --prefix public-site && npm run build --prefix admin-portal && npm run build --prefix ceo-portal"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
