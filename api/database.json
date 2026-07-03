@@ -27,6 +27,22 @@
       "requirementSheet": "VTU_Trainer_Requirements_ISE.docx",
       "initialRoadmap": "VTU_Skill_Development_Timeline.pdf",
       "onboardedAt": "2026-06-28T14:30:00.000Z"
+    },
+    {
+      "id": "uni-3",
+      "name": "IIT Bombay Center of Excellence",
+      "mouFilename": "MOU_IITB_CoE_2026.pdf",
+      "requirementSheet": "IITB_Quantum_Requirements.docx",
+      "initialRoadmap": "IITB_Research_Timeline.pdf",
+      "onboardedAt": "2026-06-20T09:00:00.000Z"
+    },
+    {
+      "id": "uni-4",
+      "name": "RV College of Engineering",
+      "mouFilename": "MOU_RVCE_Industry_Bridge.pdf",
+      "requirementSheet": "RVCE_Cybersecurity_Specs.docx",
+      "initialRoadmap": "RVCE_Milestones_Audit.pdf",
+      "onboardedAt": "2026-06-29T11:00:00.000Z"
     }
   ],
   "faculty": [
@@ -51,10 +67,43 @@
       "assignedBatch": "VTU-ISE-CloudCore",
       "technicalScreening": "Passed (9.5/10 Score)",
       "timetableAdherence": "100%"
+    },
+    {
+      "id": "train-3",
+      "name": "Elena Rostova",
+      "expertise": "Quantum Computing & Cryptography",
+      "experience": "8+ Years (Ex-IBM Quantum)",
+      "bio": "Leading joint research project with IIT Bombay on post-quantum secure protocols.",
+      "avatar": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=150&h=150&fit=crop",
+      "assignedBatch": "IITB-Quantum-Core",
+      "technicalScreening": "Passed (10/10 Score)",
+      "timetableAdherence": "100%"
+    },
+    {
+      "id": "train-4",
+      "name": "Marcus Vance",
+      "expertise": "Advanced Cybersecurity & PenTesting",
+      "experience": "12+ Years (Ex-NSA Consultant)",
+      "bio": "Specializes in zero-trust architectures and defensive red-teaming exercises.",
+      "avatar": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop",
+      "assignedBatch": "RVCE-Cyber-BatchB",
+      "technicalScreening": "Passed (9.8/10 Score)",
+      "timetableAdherence": "97%"
+    },
+    {
+      "id": "train-5",
+      "name": "Dr. Sophia Chen",
+      "expertise": "Bioinformatics & Computational Genomics",
+      "experience": "9+ Years (Broad Institute)",
+      "bio": "Developing algorithmic pipelines for custom gene-sequencing and drug discovery models.",
+      "avatar": "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=150&h=150&fit=crop",
+      "assignedBatch": "None (Awaiting Placement)",
+      "technicalScreening": "Passed (9.5/10 Score)",
+      "timetableAdherence": "100%"
     }
   ],
   "delivery": {
-    "syllabusCompletion": "82.5%",
+    "syllabusCompletion": "87.2%",
     "dailyLectureLogs": [
       {
         "date": "2026-06-29",
@@ -67,9 +116,21 @@
         "topic": "Kubernetes Pod Deployments & Namespaces",
         "batch": "VTU-Cloud",
         "uploadUrl": "lecture_log_20260629_vtu.mp4"
+      },
+      {
+        "date": "2026-06-30",
+        "topic": "Quantum Superposition & Qubit Bloch Sphere",
+        "batch": "IITB-Quantum-Core",
+        "uploadUrl": "lecture_log_20260630_iitb.mp4"
+      },
+      {
+        "date": "2026-07-01",
+        "topic": "Zero Trust Perimeter and IAM Policy Audits",
+        "batch": "RVCE-Cyber",
+        "uploadUrl": "lecture_log_20260701_rvce.mp4"
       }
     ],
-    "marksheetFilename": "internal_exam_marksheets_q1.xlsx"
+    "marksheetFilename": "internal_exam_marksheets_q2_draft.xlsx"
   },
   "events": [
     {
@@ -89,6 +150,24 @@
       "description": "A practical guide to prompt engineering, RAG pipelines, and deploying custom model endpoints.",
       "link": "#register",
       "registrationRules": "Basic Python knowledge required."
+    },
+    {
+      "id": "eve-3",
+      "title": "National Ideathon 2026: Green Computing Initiatives",
+      "date": "September 12, 2026",
+      "venue": "IIT Delhi Seminar Hall & Webex",
+      "description": "A collaborative brainstorming event seeking architectural ideas to optimize data center power consumption and reduce digital carbon footprints.",
+      "link": "#register",
+      "registrationRules": "Open to post-graduates and researchers. Max team size: 3."
+    },
+    {
+      "id": "eve-4",
+      "title": "PhD Research Colloquium: Frontiers in Artificial Intelligence",
+      "date": "October 5, 2026",
+      "venue": "TechYug Academic Auditorium",
+      "description": "Paper presentations and panel discussions with peer-reviewed publications indexed in Scopus and Web of Science.",
+      "link": "#submit-paper",
+      "registrationRules": "Submission guidelines: PDF format, IEEE standard template."
     }
   ],
   "revenue": {
