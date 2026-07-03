@@ -104,6 +104,13 @@
   },
   "auditLog": [
     {
+      "id": "audit-1782835798795-690",
+      "timestamp": "2026-06-30T16:09:58.795Z",
+      "user": "ceo@techyug.in",
+      "action": "USER_LOGIN",
+      "details": "CEO logged in from portal"
+    },
+    {
       "id": "audit-1782769144288-585",
       "timestamp": "2026-06-29T21:39:04.288Z",
       "user": "ceo@techyug.in",

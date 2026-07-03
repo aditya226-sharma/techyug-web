@@ -11,7 +11,11 @@ export default function CorporateTrainers() {
     fetch(`${apiBase}/api/faculty`)
       .then(res => {
         if (!res.ok) throw new Error("API Offline");
-        return res.json();
+        return res.text();
+      })
+      .then(text => {
+        if (!text || text.trim() === "") return [];
+        return JSON.parse(text);
       })
       .then(data => {
         setTrainers(data);
