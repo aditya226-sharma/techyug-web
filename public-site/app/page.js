@@ -60,9 +60,19 @@ export default function Home() {
           <p className="text-slate-400 text-sm leading-relaxed mb-4">
             TechYug Innovations connects educational structures with active tech landscapes. Hover and select an orbital service node to explore our six functional pillars.
           </p>
-          <div className="flex items-center gap-3">
-            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-            <span className="text-xs text-slate-500 font-mono">SYSTEM API: CONNECTED</span>
+          <div className="flex items-center gap-6">
+            <div className="flex items-center gap-3">
+              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+              <span className="text-xs text-slate-500 font-mono">SYSTEM API: CONNECTED</span>
+            </div>
+            <a 
+              href={adminPortalUrl}
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="text-xs text-[#FF9E1B]/80 hover:text-[#FF9E1B] transition-colors font-mono tracking-wider flex items-center gap-1.5"
+            >
+              • ECOSYSTEM CONTROL CENTER →
+            </a>
           </div>
         </div>
       </div>
