@@ -63,64 +63,143 @@ export default function App() {
     setTimeout(() => setToastMsg(''), 3000);
   };
 
-  // API Call Helpers
+  // API Call Helpers (Sync to localStorage)
   const fetchUniversities = () => {
-    fetch(`${API_BASE}/universities`, { headers: { 'Authorization': `Bearer ${token}` } })
-      .then(res => res.json())
-      .then(data => setUniversities(data))
-      .catch(err => console.error(err));
+    const data = localStorage.getItem('mock_universities');
+    if (data) {
+      setUniversities(JSON.parse(data));
+    } else {
+      const initial = [
+        {
+          id: "uni-1",
+          name: "Delhi Technology University",
+          mouFilename: "MOU_Signed_DTU_2026.pdf",
+          requirementSheet: "DTU_Trainer_Requirements_CSE.docx",
+          initialRoadmap: "DTU_Academic_Roadmap_Final.pdf",
+          onboardedAt: "2026-06-25T10:00:00.000Z"
+        },
+        {
+          id: "uni-2",
+          name: "VTU Belagavi",
+          mouFilename: "MOU_VTU_Executed.pdf",
+          requirementSheet: "VTU_Trainer_Requirements_ISE.docx",
+          initialRoadmap: "VTU_Skill_Development_Timeline.pdf",
+          onboardedAt: "2026-06-28T14:30:00.000Z"
+        }
+      ];
+      localStorage.setItem('mock_universities', JSON.stringify(initial));
+      setUniversities(initial);
+    }
   };
 
   const fetchFaculty = () => {
-    fetch(`${API_BASE}/faculty`)
-      .then(res => res.json())
-      .then(data => setFaculty(data))
-      .catch(err => console.error(err));
+    const data = localStorage.getItem('mock_faculty');
+    if (data) {
+      setFaculty(JSON.parse(data));
+    } else {
+      const initial = [
+        {
+          id: "train-1",
+          name: "Dr. Aravind Swamy",
+          expertise: "Artificial Intelligence & Deep Learning",
+          experience: "14+ Years (Ex-Microsoft)",
+          bio: "Author of 20+ publications and advisor to top-tier universities.",
+          avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop",
+          assignedBatch: "DTU-CSE-BatchA",
+          technicalScreening: "Passed",
+          timetableAdherence: "98%"
+        },
+        {
+          id: "train-2",
+          name: "Sarah Jenkins",
+          expertise: "Cloud Architecture & DevSecOps",
+          experience: "10+ Years (Senior Architect)",
+          bio: "Expert in Kubernetes orchestration and hybrid cloud migrations.",
+          avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&h=150&fit=crop",
+          assignedBatch: "VTU-ISE-CloudCore",
+          technicalScreening: "Passed",
+          timetableAdherence: "100%"
+        }
+      ];
+      localStorage.setItem('mock_faculty', JSON.stringify(initial));
+      setFaculty(initial);
+    }
   };
 
   const fetchDelivery = () => {
-    fetch(`${API_BASE}/delivery`, { headers: { 'Authorization': `Bearer ${token}` } })
-      .then(res => res.json())
-      .then(data => setDelivery(data))
-      .catch(err => console.error(err));
+    const data = localStorage.getItem('mock_delivery');
+    if (data) {
+      setDelivery(JSON.parse(data));
+    } else {
+      const initial = {
+        syllabusCompletion: "87.2%",
+        dailyLectureLogs: [
+          {
+            date: "2026-06-29",
+            topic: "Intro to Convolutional Networks",
+            batch: "DTU-CSE-A",
+            uploadUrl: "lecture_log_20260629_dtu.mp4"
+          },
+          {
+            date: "2026-06-29",
+            topic: "Kubernetes Pod Deployments & Namespaces",
+            batch: "VTU-Cloud",
+            uploadUrl: "lecture_log_20260629_vtu.mp4"
+          }
+        ],
+        marksheetFilename: "internal_exam_marksheets_q2_draft.xlsx"
+      };
+      localStorage.setItem('mock_delivery', JSON.stringify(initial));
+      setDelivery(initial);
+    }
   };
 
   const fetchEvents = () => {
-    fetch(`${API_BASE}/events`)
-      .then(res => res.json())
-      .then(data => setEvents(data))
-      .catch(err => console.error(err));
+    const data = localStorage.getItem('mock_events');
+    if (data) {
+      setEvents(JSON.parse(data));
+    } else {
+      const initial = [
+        {
+          id: "eve-1",
+          title: "TechYug National Hackathon 2026",
+          date: "August 22-24, 2026",
+          venue: "TechYug Innovation Hub & Virtual",
+          description: "A 48-hour challenge addressing sustainable energy solutions, smart infrastructure, and healthtech.",
+          link: "#register",
+          registrationRules: "Open to all CS/IT undergraduate streams. Max team size: 4."
+        },
+        {
+          id: "eve-2",
+          title: "Hands-on Workshop: Building with Large Language Models",
+          date: "July 18, 2026",
+          venue: "Online Interactive Sandbox",
+          description: "A practical guide to prompt engineering, RAG pipelines, and deploying custom model endpoints.",
+          link: "#register",
+          registrationRules: "Basic Python knowledge required."
+        }
+      ];
+      localStorage.setItem('mock_events', JSON.stringify(initial));
+      setEvents(initial);
+    }
   };
 
   // Auth Handler
   const handleLogin = (e) => {
     e.preventDefault();
     setLoginError('');
-    
-    fetch(`${API_BASE}/auth/login`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email: loginEmail, password: loginPassword })
-    })
-    .then(res => {
-      if (!res.ok) throw new Error("Invalid login credentials");
-      return res.json();
-    })
-    .then(data => {
-      if (data.role !== 'Operations') {
-        throw new Error("Access denied: Operations Admin role required");
-      }
-      localStorage.setItem('admin_token', data.token);
-      localStorage.setItem('admin_role', data.role);
-      localStorage.setItem('admin_email', data.email);
-      setToken(data.token);
-      setRole(data.role);
-      setEmail(data.email);
+    if (loginEmail === 'manager@techyug.in' && loginPassword === 'manager123') {
+      const mockToken = "mock-admin-token-123456";
+      localStorage.setItem('admin_token', mockToken);
+      localStorage.setItem('admin_role', 'Operations');
+      localStorage.setItem('admin_email', loginEmail);
+      setToken(mockToken);
+      setRole('Operations');
+      setEmail(loginEmail);
       triggerToast("Welcome back! Login authorized.");
-    })
-    .catch(err => {
-      setLoginError(err.message);
-    });
+    } else {
+      setLoginError("Invalid Operations credentials");
+    }
   };
 
   const handleLogout = () => {
@@ -137,121 +216,85 @@ export default function App() {
     e.preventDefault();
     if (!uniName) return;
 
-    fetch(`${API_BASE}/universities`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`
-      },
-      body: JSON.stringify({
-        name: uniName,
-        mouFilename: mouFile ? mouFile.split('\\').pop() : "MoU_Signed_Copy.pdf"
-      })
-    })
-    .then(res => res.json())
-    .then(() => {
-      setUniName('');
-      setMouFile('');
-      fetchUniversities();
-      triggerToast("New University MOU onboarded and filed!");
-    })
-    .catch(err => console.error(err));
+    const list = [...universities, {
+      id: `uni-${Date.now()}`,
+      name: uniName,
+      mouFilename: mouFile ? mouFile.split('\\').pop() : "MoU_Signed_Copy.pdf",
+      requirementSheet: "Trainer_Requirements.docx",
+      initialRoadmap: "Skill_Development_Timeline.pdf",
+      onboardedAt: new Date().toISOString()
+    }];
+    localStorage.setItem('mock_universities', JSON.stringify(list));
+    setUniversities(list);
+    setUniName('');
+    setMouFile('');
+    triggerToast("New University MOU onboarded and filed!");
   };
 
   // Faculty CRUD Operations
   const handleSaveFaculty = (e) => {
     e.preventDefault();
-    const payload = {
-      ...formData,
-      id: editId
-    };
-
-    fetch(`${API_BASE}/faculty`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`
-      },
-      body: JSON.stringify(payload)
-    })
-    .then(res => res.json())
-    .then(() => {
-      setShowModal(false);
-      fetchFaculty();
-      triggerToast(editId ? "Trainer details updated!" : "New corporate trainer added!");
-    })
-    .catch(err => console.error(err));
+    let list;
+    if (editId) {
+      list = faculty.map(f => f.id === editId ? { ...f, ...formData } : f);
+    } else {
+      list = [...faculty, {
+        ...formData,
+        id: `train-${Date.now()}`,
+        avatar: formData.avatar || "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150&h=150&fit=crop",
+        assignedBatch: formData.assignedBatch || "Not Assigned",
+        technicalScreening: "Passed",
+        timetableAdherence: "100%"
+      }];
+    }
+    localStorage.setItem('mock_faculty', JSON.stringify(list));
+    setFaculty(list);
+    setShowModal(false);
+    triggerToast(editId ? "Trainer details updated!" : "New corporate trainer added!");
   };
 
   const handleDeleteFaculty = (id) => {
     if (!confirm("Remove this trainer from active directory pool?")) return;
-
-    fetch(`${API_BASE}/faculty/${id}`, {
-      method: 'DELETE',
-      headers: { 'Authorization': `Bearer ${token}` }
-    })
-    .then(() => {
-      fetchFaculty();
-      triggerToast("Faculty member removed from system.");
-    })
-    .catch(err => console.error(err));
+    const list = faculty.filter(f => f.id !== id);
+    localStorage.setItem('mock_faculty', JSON.stringify(list));
+    setFaculty(list);
+    triggerToast("Faculty member removed from system.");
   };
 
   // Events Manager CRUD Operations
   const handleSaveEvent = (e) => {
     e.preventDefault();
-    const payload = {
-      ...formData,
-      id: editId
-    };
-
-    fetch(`${API_BASE}/events`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`
-      },
-      body: JSON.stringify(payload)
-    })
-    .then(res => res.json())
-    .then(() => {
-      setShowModal(false);
-      fetchEvents();
-      triggerToast(editId ? "Event details modified!" : "New hackathon posted live!");
-    })
-    .catch(err => console.error(err));
+    let list;
+    if (editId) {
+      list = events.map(ev => ev.id === editId ? { ...ev, ...formData } : ev);
+    } else {
+      list = [...events, {
+        ...formData,
+        id: `eve-${Date.now()}`,
+        link: formData.link || "#register",
+        registrationRules: formData.registrationRules || "Open to all branches"
+      }];
+    }
+    localStorage.setItem('mock_events', JSON.stringify(list));
+    setEvents(list);
+    setShowModal(false);
+    triggerToast(editId ? "Event details modified!" : "New hackathon posted live!");
   };
 
   const handleDeleteEvent = (id) => {
     if (!confirm("Are you sure you want to cancel and delete this event?")) return;
-
-    fetch(`${API_BASE}/events/${id}`, {
-      method: 'DELETE',
-      headers: { 'Authorization': `Bearer ${token}` }
-    })
-    .then(() => {
-      fetchEvents();
-      triggerToast("Event removed from public listings.");
-    })
-    .catch(err => console.error(err));
+    const list = events.filter(ev => ev.id !== id);
+    localStorage.setItem('mock_events', JSON.stringify(list));
+    setEvents(list);
+    triggerToast("Event removed from listings.");
   };
 
   // Delivery Tracking Update
   const handleUpdateSyllabus = (percentage) => {
-    fetch(`${API_BASE}/delivery`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`
-      },
-      body: JSON.stringify({ syllabusCompletion: `${percentage}%` })
-    })
-    .then(res => res.json())
-    .then(data => {
-      setDelivery(data);
-      triggerToast("Syllabus completion metrics synced!");
-    })
-    .catch(err => console.error(err));
+    const updated = { ...delivery, syllabusCompletion: `${percentage}%` };
+    localStorage.setItem('mock_delivery', JSON.stringify(updated));
+    setDelivery(updated);
+    triggerToast("Syllabus completion metrics synced!");
   };
 
   // Login Page View

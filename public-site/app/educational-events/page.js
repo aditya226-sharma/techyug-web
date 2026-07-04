@@ -3,50 +3,48 @@ import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 
 export default function EducationalEvents() {
-  const [events, setEvents] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [events, setEvents] = useState([
+    {
+      id: "eve-1",
+      title: "TechYug National Hackathon 2026",
+      date: "August 22-24, 2026",
+      venue: "TechYug Innovation Hub & Virtual",
+      description: "A 48-hour challenge addressing sustainable energy solutions, smart infrastructure, and healthtech.",
+      link: "#register",
+      registrationRules: "Open to all CS/IT undergraduate streams. Max team size: 4."
+    },
+    {
+      id: "eve-2",
+      title: "Hands-on Workshop: Building with Large Language Models",
+      date: "July 18, 2026",
+      venue: "Online Interactive Sandbox",
+      description: "A practical guide to prompt engineering, RAG pipelines, and deploying custom model endpoints.",
+      link: "#register",
+      registrationRules: "Basic Python knowledge required."
+    },
+    {
+      id: "eve-3",
+      title: "National Ideathon 2026: Green Computing Initiatives",
+      date: "September 12, 2026",
+      venue: "IIT Delhi Seminar Hall & Webex",
+      description: "A collaborative brainstorming event seeking architectural ideas to optimize data center power consumption and reduce digital carbon footprints.",
+      link: "#register",
+      registrationRules: "Open to post-graduates and researchers. Max team size: 3."
+    },
+    {
+      id: "eve-4",
+      title: "PhD Research Colloquium: Frontiers in Artificial Intelligence",
+      date: "October 5, 2026",
+      venue: "TechYug Academic Auditorium",
+      description: "Paper presentations and panel discussions with peer-reviewed publications indexed in Scopus and Web of Science.",
+      link: "#submit-paper",
+      registrationRules: "Submission guidelines: PDF format, IEEE standard template."
+    }
+  ]);
+  const [loading, setLoading] = useState(false);
   const [registeredId, setRegisteredId] = useState(null);
 
-  useEffect(() => {
-    const apiBase = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://127.0.0.1:5001';
-    fetch(`${apiBase}/api/events`)
-      .then(res => {
-        if (!res.ok) throw new Error("API Offline");
-        return res.text();
-      })
-      .then(text => {
-        if (!text || text.trim() === "") return [];
-        return JSON.parse(text);
-      })
-      .then(data => {
-        setEvents(data);
-        setLoading(false);
-      })
-      .catch(err => {
-        console.warn("API offline, loading default events dataset:", err);
-        setEvents([
-          {
-            id: "eve-1",
-            title: "TechYug National Hackathon 2026",
-            date: "August 22-24, 2026",
-            venue: "TechYug Innovation Hub & Virtual",
-            description: "A 48-hour challenge addressing sustainable energy solutions, smart infrastructure, and healthtech.",
-            link: "#register",
-            registrationRules: "Open to all CS/IT undergraduate streams. Max team size: 4."
-          },
-          {
-            id: "eve-2",
-            title: "Hands-on Workshop: Building with Large Language Models",
-            date: "July 18, 2026",
-            venue: "Online Interactive Sandbox",
-            description: "A practical guide to prompt engineering, RAG pipelines, and deploying custom model endpoints.",
-            link: "#register",
-            registrationRules: "Basic Python knowledge required."
-          }
-        ]);
-        setLoading(false);
-      });
-  }, []);
+  // Removed useEffect fetch to central API server
 
   const handleRegister = (eventId) => {
     setRegisteredId(eventId);
