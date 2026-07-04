@@ -15,7 +15,7 @@ const ThreeCanvas = dynamic(() => import('@/components/ThreeCanvas'), {
 });
 
 export default function Home() {
-  const adminPortalUrl = process.env.NEXT_PUBLIC_ADMIN_PORTAL_URL || 'http://localhost:5173';
+  const adminPortalUrl = process.env.NEXT_PUBLIC_ADMIN_PORTAL_URL || 'http://localhost:5000';
   const ceoPortalUrl = process.env.NEXT_PUBLIC_CEO_PORTAL_URL || 'http://127.0.0.1:5174';
   const [aboutOpen, setAboutOpen] = useState(false);
 
