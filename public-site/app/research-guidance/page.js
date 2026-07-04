@@ -87,6 +87,66 @@ export default function ResearchGuidance() {
             </p>
           </div>
         </section>
+
+        {/* New Rich Content: Research Domains */}
+        <section className="mb-20">
+          <h2 className="text-2xl font-bold mb-8 flex items-center gap-3">
+            <span className="w-6 h-1 bg-[#38f9d7]"></span>
+            Active Research Domains
+          </h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {[
+              { title: "Post-Quantum Cryptography", desc: "Developing algorithms resistant to quantum computing attacks for bank networks." },
+              { title: "Algorithmic Bioinformatics", desc: "Optimizing sequence-alignment runtimes for fast cancer mutation mapping." },
+              { title: "Autonomous Edge Systems", desc: "Energy-efficient model deployment on IoT devices for agricultural intelligence." },
+              { title: "Zero-Trust Architecture Protocols", desc: "Formal verification of security policies in distributed cloud deployments." },
+              { title: "Digital Green Computing", desc: "Cooling and load allocation algorithms to minimize data center emissions." },
+              { title: "Federated Learning Engines", desc: "Collaborative machine learning model training without centralizing sensitive datasets." }
+            ].map((domain, i) => (
+              <div key={i} className="glass-panel p-6 rounded-xl border border-white/5 hover:border-[#38f9d7]/35 transition-all">
+                <div className="text-xs text-[#38f9d7] font-mono mb-2 uppercase">DOMAIN AREA // 0{i+1}</div>
+                <h3 className="text-lg font-bold text-white mb-2">{domain.title}</h3>
+                <p className="text-slate-400 text-xs leading-relaxed">{domain.desc}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* New Rich Content: Recent Publications */}
+        <section>
+          <h2 className="text-2xl font-bold mb-8 flex items-center gap-3">
+            <span className="w-6 h-1 bg-[#FF9E1B]"></span>
+            Recent Guided Publications (Scopus / Web of Science)
+          </h2>
+          <div className="overflow-x-auto glass-panel rounded-2xl border border-white/5">
+            <table className="w-full text-left border-collapse text-xs">
+              <thead>
+                <tr className="border-b border-white/10 bg-slate-900/40 text-slate-400">
+                  <th className="p-4 font-mono">PAPER ID</th>
+                  <th className="p-4">PUBLICATION TITLE</th>
+                  <th className="p-4">AUTHORS</th>
+                  <th className="p-4">JOURNAL INDEXING</th>
+                  <th className="p-4 text-right">CITATIONS</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-white/5">
+                {[
+                  { id: "TY-RES-042", title: "Optimizing Distributed Load Allocation for Low-Emission Data Centers", authors: "Dr. A. Swamy, Dr. E. Vance", journal: "IEEE Transactions on Green Computing", citations: "47" },
+                  { id: "TY-RES-059", title: "Lattice-Based Post-Quantum Secure Schemes for Banking Infrastructure", authors: "E. Rostova, Prof. S. Sen", journal: "Journal of Cryptographic Engineering", citations: "31" },
+                  { id: "TY-RES-071", title: "Federated Learning Pipelines in Multi-tenant Health Informatics", authors: "Dr. Sophia Chen, Marcus Vance", journal: "Bioinformatics Research Letters", citations: "24" }
+                ].map((paper, i) => (
+                  <tr key={i} className="hover:bg-white/5 transition-colors">
+                    <td className="p-4 font-mono text-[#38f9d7]">{paper.id}</td>
+                    <td className="p-4 font-bold text-white">{paper.title}</td>
+                    <td className="p-4 text-slate-350">{paper.authors}</td>
+                    <td className="p-4 text-[#FF9E1B] font-mono">{paper.journal}</td>
+                    <td className="p-4 text-right font-mono font-bold text-white">{paper.citations}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </section>
       </main>
     </div>
   );
