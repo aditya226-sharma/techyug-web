@@ -35,12 +35,6 @@ export default function Home() {
           <Link href="/corporate-trainers" className="text-sm font-medium text-slate-300 hover:text-white transition-colors">
             Services
           </Link>
-          <a href={adminPortalUrl} target="_blank" rel="noopener noreferrer" className="text-sm font-medium px-4 py-2 rounded-full bg-slate-800/80 hover:bg-slate-700/80 border border-white/10 text-slate-300 hover:text-white transition-all">
-            Admin Portal
-          </a>
-          <a href={ceoPortalUrl} target="_blank" rel="noopener noreferrer" className="text-sm font-bold px-4 py-2 rounded-full bg-[#0F3D7A]/40 hover:bg-[#0F3D7A]/60 border border-[#0F3D7A]/50 text-[#4facfe] hover:text-[#00f2fe] transition-all shadow-[0_0_15px_rgba(15,61,122,0.3)]">
-            CEO Dashboard
-          </a>
         </nav>
       </header>
 
