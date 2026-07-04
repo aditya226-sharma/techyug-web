@@ -23,9 +23,6 @@ function SceneContent({ hoveredNode, setHoveredNode, activeLabel, setActiveLabel
   const centralGroupRef = useRef();
   const [zooming, setZooming] = useState(false);
 
-  // Initialize nodes list
-  nodeRefs.current = [];
-
   // Orbit parameters
   const orbitRadius = 4.8;
   const orbitSpeed = 0.25;
@@ -258,6 +255,14 @@ function LineWire({ start, end, isHovered }) {
   );
 }
 
+const STATIC_FALLBACK_STARS = Array.from({ length: 40 }).map((_, i) => ({
+  id: i,
+  x: Math.random() * 100,
+  y: Math.random() * 100,
+  size: Math.random() * 2 + 1,
+  duration: Math.random() * 3 + 2
+}));
+
 export default function ThreeCanvas() {
   const [hoveredNode, setHoveredNode] = useState(null);
   const [activeLabel, setActiveLabel] = useState("");
@@ -268,9 +273,13 @@ export default function ThreeCanvas() {
     try {
       const canvas = document.createElement('canvas');
       const supported = !!(window.WebGLRenderingContext && (canvas.getContext('webgl') || canvas.getContext('experimental-webgl')));
-      setWebGLSupported(supported);
+      requestAnimationFrame(() => {
+        setWebGLSupported(supported);
+      });
     } catch (e) {
-      setWebGLSupported(false);
+      requestAnimationFrame(() => {
+        setWebGLSupported(false);
+      });
     }
   }, []);
 
@@ -279,24 +288,19 @@ export default function ThreeCanvas() {
       <div className="w-full h-full flex items-center justify-center bg-[#121214] relative overflow-hidden">
         {/* Background Starfield Mock (Pure CSS) */}
         <div className="absolute inset-0 opacity-30 pointer-events-none">
-          {Array.from({ length: 40 }).map((_, i) => {
-            const x = Math.random() * 100;
-            const y = Math.random() * 100;
-            const size = Math.random() * 2 + 1;
-            return (
-              <div 
-                key={i} 
-                className="absolute bg-white rounded-full animate-pulse"
-                style={{
-                  left: `${x}%`,
-                  top: `${y}%`,
-                  width: `${size}px`,
-                  height: `${size}px`,
-                  animationDuration: `${Math.random() * 3 + 2}s`
-                }}
-              />
-            );
-          })}
+          {STATIC_FALLBACK_STARS.map((star) => (
+            <div 
+              key={star.id} 
+              className="absolute bg-white rounded-full animate-pulse"
+              style={{
+                left: `${star.x}%`,
+                top: `${star.y}%`,
+                width: `${star.size}px`,
+                height: `${star.size}px`,
+                animationDuration: `${star.duration}s`
+              }}
+            />
+          ))}
         </div>
 
         {/* Central Circuit motherboard base */}
@@ -434,19 +438,19 @@ export default function ThreeCanvas() {
 }
 
 
+const STATIC_STAR_COUNT = 150;
+const STATIC_STAR_POSITIONS = (() => {
+  const pos = new Float32Array(STATIC_STAR_COUNT * 3);
+  for (let i = 0; i < STATIC_STAR_COUNT * 3; i += 3) {
+    pos[i] = (Math.random() - 0.5) * 22;
+    pos[i + 1] = (Math.random() - 0.5) * 15;
+    pos[i + 2] = (Math.random() - 0.5) * 22;
+  }
+  return pos;
+})();
+
 // Background starfield component
 function StarsBackground() {
-  const count = 150;
-  const positions = React.useMemo(() => {
-    const pos = new Float32Array(count * 3);
-    for (let i = 0; i < count * 3; i += 3) {
-      pos[i] = (Math.random() - 0.5) * 22;
-      pos[i + 1] = (Math.random() - 0.5) * 15;
-      pos[i + 2] = (Math.random() - 0.5) * 22;
-    }
-    return pos;
-  }, []);
-
   const ref = useRef();
   useFrame(() => {
     if (ref.current) {
@@ -459,16 +463,12 @@ function StarsBackground() {
       <bufferGeometry>
         <bufferAttribute 
           attach="attributes-position"
-          args={[positions, 3]}
+          count={STATIC_STAR_COUNT}
+          array={STATIC_STAR_POSITIONS}
+          itemSize={3}
         />
       </bufferGeometry>
-      <pointsMaterial 
-        size={0.06} 
-        color="#ffffff" 
-        transparent 
-        opacity={0.45} 
-        sizeAttenuation 
-      />
+      <pointsMaterial size={0.07} color="#38f9d7" sizeAttenuation depthWrite={false} />
     </points>
   );
 }

@@ -166,7 +166,7 @@ export default function PlacementTraining() {
               { name: "Ananya Roy", role: "Cloud Architect @ Atlassian", text: "Building Kubernetes clusters and deploying real-world API microservices during the certifications bootcamp gave me the exact hands-on edge recruiters look for. Highly recommend!" }
             ].map((story, i) => (
               <div key={i} className="glass-panel p-6 rounded-2xl border border-white/5 hover:border-[#38f9d7]/20 transition-all flex flex-col justify-between">
-                <p className="text-slate-300 text-xs italic leading-relaxed mb-4">"{story.text}"</p>
+                <p className="text-slate-300 text-xs italic leading-relaxed mb-4">&quot;{story.text}&quot;</p>
                 <div className="flex items-center gap-3 border-t border-white/5 pt-3">
                   <div className="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center font-bold text-xs text-[#FF9E1B]">{story.name[0]}</div>
                   <div>
