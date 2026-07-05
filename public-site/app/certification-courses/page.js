@@ -74,7 +74,23 @@ export default function CertificationCourses() {
     if (!name || !email) return;
 
     setFormLoading(true);
-    // Simulate submission to API
+
+    const newConsultation = {
+      id: `cons-${Date.now()}`,
+      name,
+      email,
+      courseTrack: selectedCourse === 'course-1' ? 'Full-Stack Systems Engineering' :
+                   selectedCourse === 'course-2' ? 'Data Science & Deep Learning' :
+                   selectedCourse === 'course-3' ? 'Cybersecurity & DefSecOps' :
+                   'Bioinformatics Algorithmic Architectures',
+      requestedAt: new Date().toISOString()
+    };
+
+    const existing = localStorage.getItem('mock_course_consultations');
+    const list = existing ? JSON.parse(existing) : [];
+    list.push(newConsultation);
+    localStorage.setItem('mock_course_consultations', JSON.stringify(list));
+
     setTimeout(() => {
       setFormLoading(false);
       setFormSuccess(true);

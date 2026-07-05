@@ -13,6 +13,7 @@ export default function AdminPortal() {
   const [delivery, setDelivery] = useState({ syllabusCompletion: "0%", dailyLectureLogs: [] });
   const [events, setEvents] = useState([]);
   const [registrations, setRegistrations] = useState([]);
+  const [consultations, setConsultations] = useState([]);
 
   // Login inputs
   const [loginEmail, setLoginEmail] = useState('manager@techyug.in');
@@ -218,6 +219,19 @@ export default function AdminPortal() {
     triggerToast("Registration record deleted.");
   };
 
+  const fetchConsultations = () => {
+    const data = localStorage.getItem('mock_course_consultations');
+    setConsultations(data ? JSON.parse(data) : []);
+  };
+
+  const handleDeleteConsultation = (id) => {
+    if (!confirm("Are you sure you want to remove this consultation request?")) return;
+    const list = consultations.filter(c => c.id !== id);
+    localStorage.setItem('mock_course_consultations', JSON.stringify(list));
+    setConsultations(list);
+    triggerToast("Consultation request deleted.");
+  };
+
   useEffect(() => {
     if (!token) return;
     requestAnimationFrame(() => {
@@ -226,6 +240,7 @@ export default function AdminPortal() {
       if (view === 'delivery-tracking') fetchDelivery();
       if (view === 'events-manager') fetchEvents();
       if (view === 'event-registrations') fetchRegistrations();
+      if (view === 'course-consultations') fetchConsultations();
     });
   }, [token, view]);
 
@@ -442,6 +457,12 @@ export default function AdminPortal() {
               className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-all ${view === 'event-registrations' ? 'bg-white/5 text-[#FF9E1B] border-l-2 border-l-[#FF9E1B]' : 'text-slate-400 hover:bg-white/5 hover:text-white'}`}
             >
               Event Registrations
+            </button>
+            <button 
+              onClick={() => setView('course-consultations')}
+              className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-all ${view === 'course-consultations' ? 'bg-white/5 text-[#FF9E1B] border-l-2 border-l-[#FF9E1B]' : 'text-slate-400 hover:bg-white/5 hover:text-white'}`}
+            >
+              Course Consultations
             </button>
           </nav>
         </div>
@@ -687,6 +708,46 @@ export default function AdminPortal() {
                         <td className="p-4 text-center">
                           <button 
                             onClick={() => handleDeleteRegistration(reg.id)}
+                            className="px-2 py-1 bg-red-500/10 rounded border border-red-500/10 text-red-400 hover:bg-red-500/20 cursor-pointer"
+                          >
+                            Remove
+                          </button>
+                        </td>
+                      </tr>
+                    ))
+                  )}
+                </tbody>
+              </table>
+            </div>
+          )}
+
+          {view === 'course-consultations' && (
+            <div className="overflow-x-auto glass-panel rounded-2xl border border-white/5">
+              <table className="w-full text-left border-collapse text-xs">
+                <thead>
+                  <tr className="border-b border-white/10 bg-slate-900/40 text-slate-400">
+                    <th className="p-4">CLIENT NAME</th>
+                    <th className="p-4">EMAIL</th>
+                    <th className="p-4">COURSE TRACK</th>
+                    <th className="p-4 font-mono">DATE FILED</th>
+                    <th className="p-4 text-center">ACTIONS</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-white/5 text-slate-300">
+                  {consultations.length === 0 ? (
+                    <tr>
+                      <td colSpan="5" className="p-8 text-center text-slate-500 font-mono">NO ACTIVE CURRICULAR CONSULTATION REQUESTS</td>
+                    </tr>
+                  ) : (
+                    consultations.map(c => (
+                      <tr key={c.id} className="hover:bg-white/5">
+                        <td className="p-4 font-bold text-white">{c.name}</td>
+                        <td className="p-4">{c.email}</td>
+                        <td className="p-4 font-semibold text-[#FF9E1B]">{c.courseTrack}</td>
+                        <td className="p-4 font-mono">{new Date(c.requestedAt).toLocaleDateString()}</td>
+                        <td className="p-4 text-center">
+                          <button 
+                            onClick={() => handleDeleteConsultation(c.id)}
                             className="px-2 py-1 bg-red-500/10 rounded border border-red-500/10 text-red-400 hover:bg-red-500/20 cursor-pointer"
                           >
                             Remove
