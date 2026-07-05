@@ -18,6 +18,7 @@ export default function Home() {
   const adminPortalUrl = process.env.NEXT_PUBLIC_ADMIN_PORTAL_URL || 'http://localhost:5000';
   const ceoPortalUrl = process.env.NEXT_PUBLIC_CEO_PORTAL_URL || 'http://127.0.0.1:5174';
   const [aboutOpen, setAboutOpen] = useState(false);
+  const [ceoBioOpen, setCeoBioOpen] = useState(false);
 
   return (
     <main className="relative w-screen h-screen bg-[#121214] overflow-hidden flex flex-col">
@@ -141,7 +142,10 @@ export default function Home() {
                 <h4 className="text-xs font-mono font-bold text-slate-400 uppercase tracking-widest mb-3">Leadership Team</h4>
                 
                 {/* CEO Card */}
-                <div className="glass-panel p-4 rounded-xl border border-[#FF9E1B]/20 flex gap-4 items-center mb-4 bg-white/[0.02]">
+                <div 
+                  onClick={() => setCeoBioOpen(true)}
+                  className="glass-panel p-4 rounded-xl border border-[#FF9E1B]/20 hover:border-[#FF9E1B]/40 hover:bg-white/[0.04] transition-all flex gap-4 items-center mb-4 bg-white/[0.02] cursor-pointer"
+                >
                   <img 
                     src="/ceo.png" 
                     alt="CEO & Founder" 
@@ -151,7 +155,7 @@ export default function Home() {
                     <h5 className="font-bold text-sm text-white">Aditya Sharma</h5>
                     <span className="text-xs text-[#FF9E1B] font-mono block">CEO & Founder</span>
                     <p className="text-[10px] text-slate-400 mt-1 leading-normal font-sans">
-                      Pioneering digital architecture and premium security standards across academic networks.
+                      Pioneering digital architecture and premium security standards across academic networks. Click to view credentials.
                     </p>
                   </div>
                 </div>
@@ -173,13 +177,96 @@ export default function Home() {
             </div>
           </div>
 
+          {/* CEO Profile Modal */}
+          {ceoBioOpen && (
+            <div className="absolute inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md transition-all duration-300">
+              {/* Close click backdrop */}
+              <div className="absolute inset-0" onClick={() => setCeoBioOpen(false)} />
+
+              <div className="relative w-full max-w-2xl bg-[#121214] border border-white/10 p-8 rounded-3xl shadow-[0_0_60px_rgba(255,158,27,0.15)] z-50 flex flex-col md:flex-row gap-8 animate-zoom-in max-h-[90vh] overflow-y-auto m-4">
+                {/* Close Button */}
+                <button 
+                  onClick={() => setCeoBioOpen(false)}
+                  className="absolute top-6 right-6 w-8 h-8 rounded-full border border-white/10 flex items-center justify-center text-slate-400 hover:text-white hover:bg-white/5 transition-all text-sm cursor-pointer"
+                >
+                  ✕
+                </button>
+
+                {/* Profile Sidebar */}
+                <div className="flex flex-col items-center text-center shrink-0 w-full md:w-48">
+                  <img 
+                    src="/ceo.png" 
+                    alt="Aditya Sharma" 
+                    className="w-32 h-32 rounded-2xl object-cover border border-[#FF9E1B]/30 shadow-lg mb-4" 
+                  />
+                  <h3 className="text-sm font-bold text-white mb-0.5">Aditya Sharma</h3>
+                  <p className="text-[9px] font-mono text-[#FF9E1B] tracking-wider uppercase mb-3">CEO & Founder</p>
+                  
+                  <div className="w-full space-y-1.5 pt-4 border-t border-white/5 text-left text-[9px] font-mono text-slate-500">
+                    <div className="flex justify-between">
+                      <span>COMPANY:</span>
+                      <span className="text-white">TechYug</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span>FIELD:</span>
+                      <span className="text-white">Cyber Security</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span>COMPLIANCE:</span>
+                      <span className="text-emerald-400 font-bold">Authorized</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Content Details */}
+                <div className="flex-1 space-y-4 text-slate-300 text-xs leading-relaxed text-left">
+                  <div>
+                    <h4 className="text-[9px] font-mono font-bold text-slate-500 tracking-widest uppercase mb-1">DESIGNATION & ALIGNMENT</h4>
+                    <div className="text-[10px] font-bold text-white bg-slate-900/60 p-2.5 rounded-lg border border-white/5 font-mono leading-relaxed">
+                      CEO & Founder | TechYug Innovations | Cyber Security<br/>
+                      <span className="text-[#FF9E1B]">🔐 Cyber Security Professional | Team Lead & Operations Manager | Academic Coordinator</span>
+                    </div>
+                  </div>
+
+                  <div className="space-y-3 text-slate-300 text-xs leading-relaxed">
+                    <p>
+                      Experienced Cyber Security professional with strong expertise in cyber security training, academic operations, and team leadership. Currently handling end-to-end coordination of lectures, labs, examinations, timetables, and faculty management, while actively contributing to cyber security initiatives and skill development programs.
+                    </p>
+                    <p>
+                      Proven ability to manage 30+ team members, collaborate with HODs and Deans, and ensure smooth academic and operational workflows across multiple universities. Skilled in Cyber Security, Programming, Data Structures, and C, with hands-on experience in CTF platforms, lab management, and compliance handling.
+                    </p>
+                    <p>
+                      Passionate about knowledge sharing, operational excellence, and continuous learning, with a strong focus on building industry-ready talent through structured training and real-world cyber security exposure.
+                    </p>
+                  </div>
+
+                  {/* Badges */}
+                  <div className="flex flex-wrap gap-1.5 pt-2">
+                    {['Cyber Security', 'Team Leadership', 'Academic Operations', 'Data Structures', 'C Programming', 'CTF Training', 'Lab Management'].map((tag) => (
+                      <span key={tag} className="px-2 py-1 rounded bg-[#FF9E1B]/10 border border-[#FF9E1B]/20 text-[#FF9E1B] font-mono text-[9px]">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
           <style jsx>{`
             @keyframes slideIn {
               from { transform: translateX(100%); }
               to { transform: translateX(0); }
             }
+            @keyframes zoomIn {
+              from { opacity: 0; transform: scale(0.95); }
+              to { opacity: 1; transform: scale(1); }
+            }
             .animate-slide-in {
               animation: slideIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            }
+            .animate-zoom-in {
+              animation: zoomIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
             }
           `}</style>
         </div>
