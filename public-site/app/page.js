@@ -139,14 +139,31 @@ export default function Home() {
             <div className="border-t border-white/5 pt-6 space-y-4">
               <div>
                 <h4 className="text-xs font-mono font-bold text-slate-400 uppercase tracking-widest mb-3">Leadership Team</h4>
+                
+                {/* CEO Card */}
+                <div className="glass-panel p-4 rounded-xl border border-[#FF9E1B]/20 flex gap-4 items-center mb-4 bg-white/[0.02]">
+                  <img 
+                    src="/ceo.png" 
+                    alt="CEO & Founder" 
+                    className="w-16 h-16 rounded-lg object-cover border border-white/10" 
+                  />
+                  <div>
+                    <h5 className="font-bold text-sm text-white">Aditya Sharma</h5>
+                    <span className="text-xs text-[#FF9E1B] font-mono block">CEO & Founder</span>
+                    <p className="text-[10px] text-slate-400 mt-1 leading-normal font-sans">
+                      Pioneering digital architecture and premium security standards across academic networks.
+                    </p>
+                  </div>
+                </div>
+
                 <div className="grid grid-cols-2 gap-4 text-xs">
                   <div className="glass-panel p-3 rounded-lg border border-white/5">
                     <h5 className="font-bold text-white mb-0.5">Dr. Aravind Swamy</h5>
                     <span className="text-[10px] text-[#FF9E1B] font-mono">Academic Manager</span>
                   </div>
                   <div className="glass-panel p-3 rounded-lg border border-[#0F3D7A]/40">
-                    <h5 className="font-bold text-white mb-0.5">Executive Office</h5>
-                    <span className="text-[10px] text-[#00f2fe] font-mono">CEO Board</span>
+                    <h5 className="font-bold text-white mb-0.5">Elena Rostova</h5>
+                    <span className="text-[10px] text-[#00f2fe] font-mono">Research Lead</span>
                   </div>
                 </div>
               </div>
