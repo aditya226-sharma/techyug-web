@@ -3,49 +3,63 @@ import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 
 export default function CorporateTrainers() {
-  const [trainers, setTrainers] = useState([
-    {
-      id: "train-1",
-      name: "Dr. Aravind Swamy",
-      expertise: "Artificial Intelligence & Deep Learning",
-      experience: "14+ Years (Ex-Microsoft)",
-      bio: "Author of 20+ publications and advisor to top-tier universities.",
-      avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop",
-      assignedBatch: "DTU-CSE-BatchA",
-      timetableAdherence: "98%"
-    },
-    {
-      id: "train-2",
-      name: "Sarah Jenkins",
-      expertise: "Cloud Architecture & DevSecOps",
-      experience: "10+ Years (Senior Architect)",
-      bio: "Expert in Kubernetes orchestration and hybrid cloud migrations.",
-      avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&h=150&fit=crop",
-      assignedBatch: "VTU-ISE-CloudCore",
-      timetableAdherence: "100%"
-    },
-    {
-      id: "train-3",
-      name: "Elena Rostova",
-      expertise: "Quantum Computing & Cryptography",
-      experience: "8+ Years (Ex-IBM Quantum)",
-      bio: "Leading joint research project with IIT Bombay on post-quantum secure protocols.",
-      avatar: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=150&h=150&fit=crop",
-      assignedBatch: "IITB-Quantum-Core",
-      timetableAdherence: "100%"
-    },
-    {
-      id: "train-4",
-      name: "Marcus Vance",
-      expertise: "Advanced Cybersecurity & PenTesting",
-      experience: "12+ Years (Ex-NSA Consultant)",
-      bio: "Specializes in zero-trust architectures and defensive red-teaming exercises.",
-      avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop",
-      assignedBatch: "RVCE-Cyber-BatchB",
-      timetableAdherence: "97%"
-    }
-  ]);
-  const [loading, setLoading] = useState(false);
+  const [trainers, setTrainers] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const data = localStorage.getItem('mock_faculty');
+    requestAnimationFrame(() => {
+      if (data) {
+        setTrainers(JSON.parse(data));
+      } else {
+        const initial = [
+          {
+            id: "train-1",
+            name: "Dr. Aravind Swamy",
+            expertise: "Artificial Intelligence & Deep Learning",
+            experience: "14+ Years (Ex-Microsoft)",
+            bio: "Author of 20+ publications and advisor to top-tier universities.",
+            avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop",
+            assignedBatch: "DTU-CSE-BatchA",
+            timetableAdherence: "98%"
+          },
+          {
+            id: "train-2",
+            name: "Sarah Jenkins",
+            expertise: "Cloud Architecture & DevSecOps",
+            experience: "10+ Years (Senior Architect)",
+            bio: "Expert in Kubernetes orchestration and hybrid cloud migrations.",
+            avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&h=150&fit=crop",
+            assignedBatch: "VTU-ISE-CloudCore",
+            timetableAdherence: "100%"
+          },
+          {
+            id: "train-3",
+            name: "Elena Rostova",
+            expertise: "Quantum Computing & Cryptography",
+            experience: "8+ Years (Ex-IBM Quantum)",
+            bio: "Leading joint research project with IIT Bombay on post-quantum secure protocols.",
+            avatar: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=150&h=150&fit=crop",
+            assignedBatch: "IITB-Quantum-Core",
+            timetableAdherence: "100%"
+          },
+          {
+            id: "train-4",
+            name: "Marcus Vance",
+            expertise: "Advanced Cybersecurity & PenTesting",
+            experience: "12+ Years (Ex-NSA Consultant)",
+            bio: "Specializes in zero-trust architectures and defensive red-teaming exercises.",
+            avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop",
+            assignedBatch: "RVCE-Cyber-BatchB",
+            timetableAdherence: "97%"
+          }
+        ];
+        localStorage.setItem('mock_faculty', JSON.stringify(initial));
+        setTrainers(initial);
+      }
+      setLoading(false);
+    });
+  }, []);
 
   return (
     <div className="min-h-screen bg-[#121214] text-white flex flex-col">

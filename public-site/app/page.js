@@ -65,14 +65,12 @@ export default function Home() {
               <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
               <span className="text-xs text-slate-500 font-mono">SYSTEM API: CONNECTED</span>
             </div>
-            <a 
-              href={adminPortalUrl}
-              target="_blank" 
-              rel="noopener noreferrer" 
+            <Link 
+              href="/admin"
               className="text-xs text-[#FF9E1B]/80 hover:text-[#FF9E1B] transition-colors font-mono tracking-wider flex items-center gap-1.5"
             >
               • ECOSYSTEM CONTROL CENTER →
-            </a>
+            </Link>
           </div>
         </div>
       </div>

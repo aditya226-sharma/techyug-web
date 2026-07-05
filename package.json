@@ -3,11 +3,9 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "install:all": "npm install --prefix public-site && npm install --prefix admin-portal",
-    "dev:public": "npm run dev --prefix public-site",
-    "dev:admin": "npm run dev --prefix admin-portal",
-    "dev": "concurrently -n \"public,admin\" -c \"green,blue\" \"npm run dev:public\" \"npm run dev:admin\"",
-    "build:all": "npm run build --prefix public-site && npm run build --prefix admin-portal"
+    "install:all": "npm install --prefix public-site",
+    "dev": "npm run dev --prefix public-site",
+    "build:all": "npm run build --prefix public-site"
   },
   "devDependencies": {
     "concurrently": "^8.2.2"
