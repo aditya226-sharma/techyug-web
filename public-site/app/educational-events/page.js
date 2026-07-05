@@ -5,7 +5,14 @@ import Link from 'next/link';
 export default function EducationalEvents() {
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [registeredId, setRegisteredId] = useState(null);
+  
+  // Registration Form States
+  const [registeringEvent, setRegisteringEvent] = useState(null);
+  const [studentName, setStudentName] = useState('');
+  const [studentEmail, setStudentEmail] = useState('');
+  const [studentPhone, setStudentPhone] = useState('');
+  const [studentCollege, setStudentCollege] = useState('');
+  const [registrationSuccess, setRegistrationSuccess] = useState(false);
 
   useEffect(() => {
     const data = localStorage.getItem('mock_events');
@@ -58,13 +65,33 @@ export default function EducationalEvents() {
     });
   }, []);
 
-  const handleRegister = (eventId) => {
-    setRegisteredId(eventId);
-    // Mimic API register submission trigger
-    setTimeout(() => {
-      alert("Registration request submitted to TechYug central API database!");
-      setRegisteredId(null);
-    }, 1000);
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+    if (!studentName || !studentEmail || !studentPhone || !studentCollege) return;
+
+    const newReg = {
+      id: `reg-${Date.now()}`,
+      eventId: registeringEvent.id,
+      eventTitle: registeringEvent.title,
+      studentName,
+      studentEmail,
+      studentPhone,
+      studentCollege,
+      registeredAt: new Date().toISOString()
+    };
+
+    const existing = localStorage.getItem('mock_event_registrations');
+    const list = existing ? JSON.parse(existing) : [];
+    list.push(newReg);
+    localStorage.setItem('mock_event_registrations', JSON.stringify(list));
+
+    // Clear form inputs
+    setStudentName('');
+    setStudentEmail('');
+    setStudentPhone('');
+    setStudentCollege('');
+
+    setRegistrationSuccess(true);
   };
 
   return (
@@ -122,10 +149,10 @@ export default function EducationalEvents() {
                   </div>
 
                   <button
-                    onClick={() => handleRegister(e.id)}
+                    onClick={() => setRegisteringEvent(e)}
                     className="w-full py-3 rounded-xl bg-gradient-to-r from-[#b19ffb] to-[#764ba2] hover:shadow-[0_0_15px_rgba(177,159,251,0.25)] text-white font-bold text-sm transition-all cursor-pointer"
                   >
-                    {registeredId === e.id ? 'Connecting to API...' : 'Register for Event'}
+                    Register for Event
                   </button>
                 </div>
               ))}
@@ -133,6 +160,105 @@ export default function EducationalEvents() {
           )}
         </section>
       </main>
+
+      {/* Registration Modal */}
+      {registeringEvent && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/75 backdrop-blur-sm p-4 animate-fade-in">
+          <div className="bg-[#121214] border border-white/10 p-8 rounded-2xl w-full max-w-md relative shadow-2xl">
+            <button 
+              onClick={() => {
+                setRegisteringEvent(null);
+                setRegistrationSuccess(false);
+              }}
+              className="absolute top-6 right-6 w-8 h-8 rounded-full border border-white/5 flex items-center justify-center hover:bg-white/5 text-slate-400 hover:text-white font-mono text-sm cursor-pointer"
+            >
+              ✕
+            </button>
+
+            {registrationSuccess ? (
+              <div className="text-center space-y-4 py-4">
+                <div className="w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center mx-auto text-2xl font-bold">
+                  ✓
+                </div>
+                <h3 className="text-lg font-bold text-white">Registration Complete!</h3>
+                <p className="text-xs text-slate-400 leading-relaxed">
+                  Your registration for <span className="text-[#FF9E1B] font-bold">{registeringEvent.title}</span> has been logged. The operations team will reach out with the orientation agenda.
+                </p>
+                <button 
+                  onClick={() => {
+                    setRegisteringEvent(null);
+                    setRegistrationSuccess(false);
+                  }}
+                  className="px-6 py-2 bg-[#FF9E1B] text-slate-950 font-bold rounded-lg text-xs cursor-pointer"
+                >
+                  Done
+                </button>
+              </div>
+            ) : (
+              <form onSubmit={handleFormSubmit} className="space-y-4 text-left">
+                <div>
+                  <h3 className="text-lg font-bold text-white leading-snug">{registeringEvent.title}</h3>
+                  <p className="text-[10px] text-slate-400 font-mono tracking-wider mt-1">STUDENT REGISTRATION FORM</p>
+                </div>
+
+                <div className="space-y-3.5 pt-2">
+                  <div>
+                    <label className="block text-[10px] font-mono text-slate-500 mb-1">FULL NAME</label>
+                    <input 
+                      type="text" 
+                      value={studentName}
+                      onChange={e => setStudentName(e.target.value)}
+                      className="w-full bg-slate-900 border border-white/10 rounded-lg p-2 text-xs focus:outline-none focus:border-[#FF9E1B] text-slate-200"
+                      placeholder="E.g., Arjun Mehta"
+                      required
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-[10px] font-mono text-slate-500 mb-1">EMAIL ADDRESS</label>
+                    <input 
+                      type="email" 
+                      value={studentEmail}
+                      onChange={e => setStudentEmail(e.target.value)}
+                      className="w-full bg-slate-900 border border-white/10 rounded-lg p-2 text-xs focus:outline-none focus:border-[#FF9E1B] text-slate-200"
+                      placeholder="arjun@university.edu"
+                      required
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-[10px] font-mono text-slate-500 mb-1">PHONE NUMBER</label>
+                    <input 
+                      type="tel" 
+                      value={studentPhone}
+                      onChange={e => setStudentPhone(e.target.value)}
+                      className="w-full bg-slate-900 border border-white/10 rounded-lg p-2 text-xs focus:outline-none focus:border-[#FF9E1B] text-slate-200"
+                      placeholder="+91 98765 43210"
+                      required
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-[10px] font-mono text-slate-500 mb-1">COLLEGE / UNIVERSITY</label>
+                    <input 
+                      type="text" 
+                      value={studentCollege}
+                      onChange={e => setStudentCollege(e.target.value)}
+                      className="w-full bg-slate-900 border border-white/10 rounded-lg p-2 text-xs focus:outline-none focus:border-[#FF9E1B] text-slate-200"
+                      placeholder="E.g., IIT Bombay"
+                      required
+                    />
+                  </div>
+                </div>
+
+                <button 
+                  type="submit" 
+                  className="w-full py-2.5 bg-[#FF9E1B] text-slate-950 font-bold text-xs rounded-lg transition-all hover:opacity-90 cursor-pointer"
+                >
+                  Submit Registration
+                </button>
+              </form>
+            )}
+          </div>
+        </div>
+      )}
     </div>
   );
 }
