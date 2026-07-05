@@ -144,7 +144,7 @@ export default function Home() {
                 {/* CEO Card */}
                 <div 
                   onClick={() => setCeoBioOpen(true)}
-                  className="glass-panel p-4 rounded-xl border border-[#FF9E1B]/20 hover:border-[#FF9E1B]/40 hover:bg-white/[0.04] transition-all flex gap-4 items-center mb-4 bg-white/[0.02] cursor-pointer"
+                  className="glass-panel p-4 rounded-xl border border-[#FF9E1B]/20 hover:border-[#FF9E1B]/40 hover:bg-white/[0.04] transition-all flex gap-4 items-center mb-4 bg-white/[0.02] cursor-pointer animate-pulse-slow"
                 >
                   <img 
                     src="/ceo.png" 
@@ -157,17 +157,6 @@ export default function Home() {
                     <p className="text-[10px] text-slate-400 mt-1 leading-normal font-sans">
                       Pioneering digital architecture and premium security standards across academic networks. Click to view credentials.
                     </p>
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-2 gap-4 text-xs">
-                  <div className="glass-panel p-3 rounded-lg border border-white/5">
-                    <h5 className="font-bold text-white mb-0.5">Dr. Aravind Swamy</h5>
-                    <span className="text-[10px] text-[#FF9E1B] font-mono">Academic Manager</span>
-                  </div>
-                  <div className="glass-panel p-3 rounded-lg border border-[#0F3D7A]/40">
-                    <h5 className="font-bold text-white mb-0.5">Elena Rostova</h5>
-                    <span className="text-[10px] text-[#00f2fe] font-mono">Research Lead</span>
                   </div>
                 </div>
               </div>
@@ -262,11 +251,18 @@ export default function Home() {
               from { opacity: 0; transform: scale(0.95); }
               to { opacity: 1; transform: scale(1); }
             }
+            @keyframes pulseGlow {
+              0%, 100% { border-color: rgba(255, 158, 27, 0.2); box-shadow: 0 0 10px rgba(255, 158, 27, 0); }
+              50% { border-color: rgba(255, 158, 27, 0.4); box-shadow: 0 0 15px rgba(255, 158, 27, 0.1); }
+            }
             .animate-slide-in {
               animation: slideIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
             }
             .animate-zoom-in {
               animation: zoomIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            }
+            .animate-pulse-slow {
+              animation: pulseGlow 3s ease-in-out infinite;
             }
           `}</style>
         </div>
