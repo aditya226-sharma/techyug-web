@@ -7,39 +7,35 @@ export default function SoftwareDevelopment() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // In a production environment, this would pull projects from /api/development
-    // For our decoupled setup, we'll hit the API server or load default fallbacks
-    const apiBase = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://127.0.0.1:5001';
-    fetch(`${apiBase}/api/faculty`) // Just fetching config, but let's mock it beautifully using static data connected to TechYug's software model
-      .then(() => {
-        setProjects([
-          {
-            id: "dev-1",
-            title: "EduPortal LMS Ecosystem",
-            category: "Enterprise Software",
-            tech: ["Node.js", "React.js", "GraphQL", "PostgreSQL"],
-            description: "A comprehensive Learning Management System deployed across 15+ universities, supporting real-time student analytics, automated grading, and live video lectures.",
-            image: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=500&h=300&fit=crop"
-          },
-          {
-            id: "dev-2",
-            title: "VitalsConnect Healthcare App",
-            category: "Mobile Application",
-            tech: ["Flutter", "Firebase", "WebRTC", "Node.js"],
-            description: "Cross-platform mobile telemedicine application enabling real-time vitals monitoring via IoT integration, secure e-prescriptions, and encrypted video consultations.",
-            image: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=500&h=300&fit=crop"
-          },
-          {
-            id: "dev-3",
-            title: "AgriVision AI Platform",
-            category: "Web & AI Solution",
-            tech: ["Python", "TensorFlow", "FastAPI", "React"],
-            description: "Computer vision web portal for smart farms to detect early crop diseases, estimate yields via drone imagery, and generate automated watering schedules.",
-            image: "https://images.unsplash.com/photo-1530836369250-ef72a3f5cda8?w=500&h=300&fit=crop"
-          }
-        ]);
-        setLoading(false);
-      });
+    requestAnimationFrame(() => {
+      setProjects([
+        {
+          id: "dev-1",
+          title: "EduPortal LMS Ecosystem",
+          category: "Enterprise Software",
+          tech: ["Node.js", "React.js", "GraphQL", "PostgreSQL"],
+          description: "A comprehensive Learning Management System deployed across 15+ universities, supporting real-time student analytics, automated grading, and live video lectures.",
+          image: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=500&h=300&fit=crop"
+        },
+        {
+          id: "dev-2",
+          title: "VitalsConnect Healthcare App",
+          category: "Mobile Application",
+          tech: ["Flutter", "Firebase", "WebRTC", "Node.js"],
+          description: "Cross-platform mobile telemedicine application enabling real-time vitals monitoring via IoT integration, secure e-prescriptions, and encrypted video consultations.",
+          image: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=500&h=300&fit=crop"
+        },
+        {
+          id: "dev-3",
+          title: "AgriVision AI Platform",
+          category: "Web & AI Solution",
+          tech: ["Python", "TensorFlow", "FastAPI", "React"],
+          description: "Computer vision web portal for smart farms to detect early crop diseases, estimate yields via drone imagery, and generate automated watering schedules.",
+          image: "https://images.unsplash.com/photo-1530836369250-ef72a3f5cda8?w=500&h=300&fit=crop"
+        }
+      ]);
+      setLoading(false);
+    });
   }, []);
 
   return (
