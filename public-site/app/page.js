@@ -152,7 +152,7 @@ export default function Home() {
                     className="w-16 h-16 rounded-lg object-cover border border-white/10" 
                   />
                   <div>
-                    <h5 className="font-bold text-sm text-white">Aditya Sharma</h5>
+                    <h5 className="font-bold text-sm text-white">MR. Kewal Metha</h5>
                     <span className="text-xs text-[#FF9E1B] font-mono block">CEO & Founder</span>
                     <p className="text-[10px] text-slate-400 mt-1 leading-normal font-sans">
                       Pioneering digital architecture and premium security standards across academic networks. Click to view credentials.
@@ -185,10 +185,10 @@ export default function Home() {
                 <div className="flex flex-col items-center text-center shrink-0 w-full md:w-48">
                   <img 
                     src="/ceo.png" 
-                    alt="Aditya Sharma" 
+                    alt="MR. Kewal Metha" 
                     className="w-32 h-32 rounded-2xl object-cover border border-[#FF9E1B]/30 shadow-lg mb-4" 
                   />
-                  <h3 className="text-sm font-bold text-white mb-0.5">Aditya Sharma</h3>
+                  <h3 className="text-sm font-bold text-white mb-0.5">MR. Kewal Metha</h3>
                   <p className="text-[9px] font-mono text-[#FF9E1B] tracking-wider uppercase mb-3">CEO & Founder</p>
                   
                   <div className="w-full space-y-1.5 pt-4 border-t border-white/5 text-left text-[9px] font-mono text-slate-500">
