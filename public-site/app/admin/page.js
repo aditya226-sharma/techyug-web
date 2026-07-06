@@ -411,7 +411,7 @@ export default function AdminPortal() {
 
   // 2. Render Dashboard Interface
   return (
-    <div className="w-screen h-screen flex bg-[#121214] text-slate-100 overflow-hidden font-sans relative">
+    <div className="w-screen h-screen flex flex-col md:flex-row bg-[#121214] text-slate-100 overflow-hidden font-sans relative">
       {/* Toast */}
       {toastMsg && (
         <div className="absolute top-6 right-6 px-4 py-2 bg-emerald-500 text-slate-950 text-xs font-bold rounded-lg shadow-lg z-50 animate-bounce">
@@ -419,55 +419,55 @@ export default function AdminPortal() {
         </div>
       )}
 
-      {/* Sidebar */}
-      <aside className="w-64 bg-slate-950 border-r border-white/5 p-6 flex flex-col justify-between shrink-0">
-        <div>
-          <div className="flex items-center gap-2 mb-8">
+      {/* Sidebar / Top Nav */}
+      <aside className="w-full md:w-64 bg-slate-950 border-b md:border-b-0 md:border-r border-white/5 p-4 md:p-6 flex flex-row md:flex-col justify-between items-center md:items-stretch shrink-0 z-20">
+        <div className="flex md:flex-col items-center md:items-stretch gap-4 md:gap-0 w-full min-w-0">
+          <div className="flex items-center gap-2 mb-0 md:mb-8 shrink-0">
             <div className="w-3.5 h-3.5 rounded-full bg-[#FF9E1B] shadow-[0_0_10px_#FF9E1B]"></div>
-            <span className="font-sans font-bold text-lg text-white">TechYug Ops</span>
+            <span className="font-sans font-bold text-base md:text-lg text-white">TechYug Ops</span>
           </div>
 
-          <nav className="space-y-1">
+          <nav className="flex md:flex-col gap-1 overflow-x-auto md:overflow-visible no-scrollbar px-2 md:px-0 py-1 flex-1 w-full min-w-0">
             <button 
               onClick={() => setView('faculty')}
-              className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-all ${view === 'faculty' ? 'bg-white/5 text-[#FF9E1B] border-l-2 border-l-[#FF9E1B]' : 'text-slate-400 hover:bg-white/5 hover:text-white'}`}
+              className={`whitespace-nowrap flex items-center gap-3 px-3 md:px-4 py-2 md:py-3 rounded-lg text-xs md:text-sm font-medium transition-all ${view === 'faculty' ? 'bg-white/5 text-[#FF9E1B] border-b-2 border-b-[#FF9E1B] md:border-b-0 md:border-l-2 md:border-l-[#FF9E1B]' : 'text-slate-400 hover:bg-white/5 hover:text-white'}`}
             >
-              Corporate Trainers
+              Trainers
             </button>
             <button 
               onClick={() => setView('universities')}
-              className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-all ${view === 'universities' ? 'bg-white/5 text-[#FF9E1B] border-l-2 border-l-[#FF9E1B]' : 'text-slate-400 hover:bg-white/5 hover:text-white'}`}
+              className={`whitespace-nowrap flex items-center gap-3 px-3 md:px-4 py-2 md:py-3 rounded-lg text-xs md:text-sm font-medium transition-all ${view === 'universities' ? 'bg-white/5 text-[#FF9E1B] border-b-2 border-b-[#FF9E1B] md:border-b-0 md:border-l-2 md:border-l-[#FF9E1B]' : 'text-slate-400 hover:bg-white/5 hover:text-white'}`}
             >
-              University MoUs
+              MoUs
             </button>
             <button 
               onClick={() => setView('delivery-tracking')}
-              className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-all ${view === 'delivery-tracking' ? 'bg-white/5 text-[#FF9E1B] border-l-2 border-l-[#FF9E1B]' : 'text-slate-400 hover:bg-white/5 hover:text-white'}`}
+              className={`whitespace-nowrap flex items-center gap-3 px-3 md:px-4 py-2 md:py-3 rounded-lg text-xs md:text-sm font-medium transition-all ${view === 'delivery-tracking' ? 'bg-white/5 text-[#FF9E1B] border-b-2 border-b-[#FF9E1B] md:border-b-0 md:border-l-2 md:border-l-[#FF9E1B]' : 'text-slate-400 hover:bg-white/5 hover:text-white'}`}
             >
-              Delivery Tracking
+              Delivery
             </button>
             <button 
               onClick={() => setView('events-manager')}
-              className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-all ${view === 'events-manager' ? 'bg-white/5 text-[#FF9E1B] border-l-2 border-l-[#FF9E1B]' : 'text-slate-400 hover:bg-white/5 hover:text-white'}`}
+              className={`whitespace-nowrap flex items-center gap-3 px-3 md:px-4 py-2 md:py-3 rounded-lg text-xs md:text-sm font-medium transition-all ${view === 'events-manager' ? 'bg-white/5 text-[#FF9E1B] border-b-2 border-b-[#FF9E1B] md:border-b-0 md:border-l-2 md:border-l-[#FF9E1B]' : 'text-slate-400 hover:bg-white/5 hover:text-white'}`}
             >
-              Events Manager
+              Events
             </button>
             <button 
               onClick={() => setView('event-registrations')}
-              className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-all ${view === 'event-registrations' ? 'bg-white/5 text-[#FF9E1B] border-l-2 border-l-[#FF9E1B]' : 'text-slate-400 hover:bg-white/5 hover:text-white'}`}
+              className={`whitespace-nowrap flex items-center gap-3 px-3 md:px-4 py-2 md:py-3 rounded-lg text-xs md:text-sm font-medium transition-all ${view === 'event-registrations' ? 'bg-white/5 text-[#FF9E1B] border-l-2 border-l-[#FF9E1B] md:border-l-0 md:border-l-[#FF9E1B]' : 'text-slate-400 hover:bg-white/5 hover:text-white'}`}
             >
-              Event Registrations
+              Registrations
             </button>
             <button 
               onClick={() => setView('course-consultations')}
-              className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-all ${view === 'course-consultations' ? 'bg-white/5 text-[#FF9E1B] border-l-2 border-l-[#FF9E1B]' : 'text-slate-400 hover:bg-white/5 hover:text-white'}`}
+              className={`whitespace-nowrap flex items-center gap-3 px-3 md:px-4 py-2 md:py-3 rounded-lg text-xs md:text-sm font-medium transition-all ${view === 'course-consultations' ? 'bg-white/5 text-[#FF9E1B] border-l-2 border-l-[#FF9E1B] md:border-l-0 md:border-l-[#FF9E1B]' : 'text-slate-400 hover:bg-white/5 hover:text-white'}`}
             >
-              Course Consultations
+              Consultations
             </button>
           </nav>
         </div>
 
-        <div>
+        <div className="hidden md:flex flex-col w-full">
           <div className="p-3 mb-4 rounded-lg bg-white/5 border border-white/5 flex items-center gap-2">
             <div className="w-8 h-8 rounded-full bg-[#FF9E1B]/20 flex items-center justify-center text-xs font-bold text-[#FF9E1B]">
               OP
@@ -484,12 +484,20 @@ export default function AdminPortal() {
             Sign Out
           </button>
         </div>
+
+        <button 
+          onClick={handleLogout}
+          className="md:hidden p-2 rounded bg-red-600/10 border border-red-500/20 text-red-400 text-xs hover:bg-red-600/20 ml-2 shrink-0 cursor-pointer"
+          title="Sign Out"
+        >
+          Sign Out
+        </button>
       </aside>
 
       {/* Workspace Viewport */}
-      <main className="flex-1 p-8 overflow-y-auto flex flex-col">
+      <main className="flex-1 p-4 md:p-8 overflow-y-auto flex flex-col">
         {/* Module Header */}
-        <div className="flex justify-between items-center mb-8 pb-4 border-b border-white/5">
+        <div className="flex flex-col sm:flex-row justify-between sm:items-center mb-8 pb-4 border-b border-white/5 gap-4">
           <div>
             <h1 className="text-2xl font-bold capitalize text-white">{view.replace('-', ' ')} Workspace</h1>
             <p className="text-slate-400 text-xs">Manage active assets and databases synced directly on the client.</p>
@@ -606,14 +614,14 @@ export default function AdminPortal() {
           )}
 
           {view === 'delivery-tracking' && (
-            <div className="max-w-md space-y-6">
+            <div className="w-full max-w-md space-y-6">
               <div className="glass-panel p-6 rounded-2xl border border-white/5 space-y-4">
                 <h3 className="font-bold text-sm">Ecosystem Syllabus Completion</h3>
                 <div className="flex justify-between items-center text-xs font-mono">
                   <span>CURRENT METRIC:</span>
                   <span className="text-[#FF9E1B] font-bold">{delivery.syllabusCompletion}</span>
                 </div>
-                <div className="flex gap-2">
+                <div className="flex flex-wrap gap-2">
                   {[75, 80, 85, 90, 95, 100].map(pct => (
                     <button 
                       key={pct}

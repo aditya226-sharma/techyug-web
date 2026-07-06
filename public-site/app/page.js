@@ -26,14 +26,14 @@ export default function Home() {
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:32px_32px] pointer-events-none"></div>
 
       {/* Floating Header */}
-      <header className="absolute top-0 left-0 w-full h-20 px-8 flex items-center justify-between z-20 bg-gradient-to-b from-[#121214]/80 to-transparent backdrop-blur-sm border-b border-white/5">
+      <header className="absolute top-0 left-0 w-full h-20 px-4 md:px-8 flex items-center justify-between z-20 bg-gradient-to-b from-[#121214]/80 to-transparent backdrop-blur-sm border-b border-white/5">
         <div className="flex items-center gap-2">
           <div className="w-3 h-3 bg-[#FF9E1B] rounded-full shadow-[0_0_10px_#FF9E1B]"></div>
           <span className="font-sans text-xl font-bold bg-gradient-to-r from-white via-slate-200 to-[#FF9E1B] bg-clip-text text-transparent tracking-wide">
             TechYug Innovations
           </span>
         </div>
-        <nav className="flex items-center gap-6">
+        <nav className="flex items-center gap-4 md:gap-6">
           <button 
             onClick={() => setAboutOpen(true)}
             className="text-sm font-medium text-slate-300 hover:text-white transition-colors"
@@ -47,12 +47,12 @@ export default function Home() {
       </header>
 
       {/* Hero Title overlays (Left aligned) */}
-      <div className="absolute top-36 left-12 max-w-lg z-10 pointer-events-none select-none">
-        <div className="glass-panel p-8 rounded-2xl border-l-4 border-l-[#FF9E1B]">
+      <div className="absolute top-28 left-4 right-4 md:right-auto md:top-36 md:left-12 max-w-none md:max-w-lg z-10 pointer-events-none select-none">
+        <div className="glass-panel p-6 md:p-8 rounded-2xl border-l-4 border-l-[#FF9E1B] pointer-events-auto">
           <div className="text-xs font-bold uppercase tracking-widest text-[#FF9E1B] mb-2 font-mono">
             Visionary Web Ecosystem
           </div>
-          <h1 className="text-4xl font-extrabold tracking-tight text-white mb-4 leading-none">
+          <h1 className="text-3xl md:text-4xl font-extrabold tracking-tight text-white mb-4 leading-none">
             Bridging Academia <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#4facfe] to-[#FF9E1B]">
               & Technical Industry
@@ -61,7 +61,7 @@ export default function Home() {
           <p className="text-slate-400 text-sm leading-relaxed mb-4">
             TechYug Innovations connects educational structures with active tech landscapes. Hover and select an orbital service node to explore our six functional pillars.
           </p>
-          <div className="flex items-center gap-6">
+          <div className="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6">
             <div className="flex items-center gap-3">
               <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
               <span className="text-xs text-slate-500 font-mono">SYSTEM API: CONNECTED</span>
@@ -77,8 +77,8 @@ export default function Home() {
       </div>
 
       {/* Floating Scroll / Interaction Instruction */}
-      <div className="absolute bottom-6 right-12 z-10 pointer-events-none text-right">
-        <p className="text-xs font-mono text-slate-500 tracking-wider">
+      <div className="absolute bottom-6 left-4 right-4 md:left-auto md:right-12 z-10 pointer-events-none text-center md:text-right">
+        <p className="text-[10px] md:text-xs font-mono text-slate-500 tracking-wider">
           MOUSE PAN TO ORBIT • HOVER NODE TO EXPOND • CLICK TO ENTER
         </p>
       </div>
@@ -95,7 +95,7 @@ export default function Home() {
           <div className="absolute inset-0 cursor-pointer" onClick={() => setAboutOpen(false)} />
           
           {/* Panel content */}
-          <div className="relative w-full max-w-lg h-full bg-[#121214]/95 border-l border-white/10 p-10 flex flex-col justify-between shadow-[0_0_50px_rgba(0,0,0,0.8)] z-40 animate-slide-in">
+          <div className="relative w-full max-w-full md:max-w-lg h-full bg-[#121214]/95 border-l border-white/10 p-6 md:p-10 flex flex-col justify-between shadow-[0_0_50px_rgba(0,0,0,0.8)] z-40 animate-slide-in">
             <div>
               {/* Header */}
               <div className="flex justify-between items-center mb-8 pb-4 border-b border-white/5">
